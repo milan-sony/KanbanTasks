@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import routes  from "./routes/index.js"
 
 // config .env
 dotenv.config()
@@ -7,11 +8,9 @@ dotenv.config()
 // creates an express app
 const app = express()
 
-// Base URL
-app.use("/", (req, res) => {
-    res.json("This is the express server")
-})
+// base URL
+app.use("/", routes)
 
 app.listen((process.env.PORT || 5000), () => {
-    console.log(`\nServer listening on port: ${process.env.PORT || 5000}`)
+    console.log(`\n🚀 Server listening on port: ${process.env.PORT || 5000}`)
 })
