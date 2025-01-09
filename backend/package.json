@@ -25,7 +25,8 @@
   "homepage": "https://github.com/milan-sony/KanbanTasks#readme",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^8.9.3"
   },
   "engines": {
     "npm": ">=8.0.0 <10.9.0",
