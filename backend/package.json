@@ -27,7 +27,8 @@
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.9.3"
+    "mongoose": "^8.9.3",
+    "nodemailer": "^6.9.16"
   },
   "engines": {
     "npm": ">=8.0.0 <10.9.0",
