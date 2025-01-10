@@ -1,6 +1,7 @@
 import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 import sendOTP from "../utils/otpManager.js"
+import generateToken from "../utils/generateTokens.js"
 
 
 const signup = async (req, res) => {
@@ -54,9 +55,13 @@ const signup = async (req, res) => {
             password: hashedPassword
         })
 
+        console.log("New user: ", newUser)
+
         if (newUser) {
             // send OTP
             sendOTP(email)
+            // generate token
+            generateToken(newUser._id, res)
             await newUser.save()
             res.status(201).send({
                 status: 201,
