@@ -6,7 +6,6 @@ const mailSender = async (options) => {
         const transporter = nodemailer.createTransport({
             host: process.env.SMPT_HOST,
             port: process.env.SMPT_PORT,
-            secure: true, // use SSL
             auth: {
                 user: process.env.SMPT_MAIL,
                 pass: process.env.SMPT_APP_PASSWORD
@@ -20,12 +19,12 @@ const mailSender = async (options) => {
             subject: options.subject,
             html: options.message
         }
-
-        console.log("Mail: ", mail)
+        console.log("\n✔️  Mail generated")
         await transporter.sendMail(mail)
+        console.log(`\n✔️  Mail send to: ${options.to}`)
 
     } catch (error) {
-        console.error("Error sending mail", error)
+        console.error("Error sending mail", error.message)
     }
 }
 
