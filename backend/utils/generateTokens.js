@@ -11,7 +11,7 @@ const generateToken = (userId, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // Sets the lifetime of the cookie to 7 days (in milliseconds)
         httpOnly: true, // prevent XSS
         sameSite: "strict", // prevent CSRF
-        secure: process.env.NODE_ENV !== "development" // check http/https
+        secure: process.env.NODE_ENV !== "development" // This flag ensures that the cookie is only sent over HTTPS connections. It is set to true in production (when NODE_ENV is not "development").
     })
 
     return token
