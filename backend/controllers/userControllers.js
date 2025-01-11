@@ -10,19 +10,19 @@ const signup = async (req, res) => {
 
         // check empty input fields
         if (!name) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 message: "Name field is required"
             })
         }
         if (!email) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 message: "Email field is required"
             })
         }
         if (!password) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 message: "Password field is required"
             })
@@ -30,16 +30,16 @@ const signup = async (req, res) => {
 
         // check password length
         if (password.length < 6) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 message: "Password must be atleast 6 character"
             })
         }
 
         // check if the user already exists
-        const user = await User.findOne({ email: email })
-        if (user) {
-            return res.status(400).send({
+        const existingUser = await User.findOne({ email: email })
+        if (existingUser) {
+            return res.status(400).json({
                 status: 400,
                 message: "This user already exists"
             })
@@ -55,29 +55,27 @@ const signup = async (req, res) => {
             password: hashedPassword
         })
 
-        console.log("New user: ", newUser)
-
         if (newUser) {
             // send OTP
-            sendOTP(email)
+            await sendOTP(email)
             // generate token
             generateToken(newUser._id, res)
             await newUser.save()
-            res.status(201).send({
+            return res.status(201).json({
                 status: 201,
                 message: "Account successfully created"
             })
         } else {
-            res.status(400).send({
+            res.status(400).json({
                 status: 400,
                 message: "Something went wrong, account not created"
             })
         }
     } catch (error) {
-        console.error("Error signingup user: ", error.message)
-        return res.status(500).send({
+        console.error("Error signing up user: ", error.message)
+        return res.status(500).json({
             status: 500,
-            message: "Error signingup user",
+            message: "Error signing up user",
             error: error.message
         })
     }
