@@ -4,7 +4,7 @@ import sendOTP from "../utils/otpManager.js"
 import generateToken from "../utils/generateTokens.js"
 
 
-const signup = async (req, res) => {
+export const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body
 
@@ -81,4 +81,41 @@ const signup = async (req, res) => {
     }
 }
 
-export default signup
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body
+
+        // check whether the user exists in the DB
+        const user = await User.findOne({ email: email })
+        if (!user) {
+            return res.status(400).json({
+                status: 400,
+                message: "Invalid credentials"
+            })
+        }
+
+        // check if the password is correct
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+        if (!isPasswordCorrect) {
+            return res.status(400).json({
+                status: 400,
+                message: "Invalid credentials"
+            })
+        }
+
+        // generate token for user login
+        generateToken(user._id, res)
+        res.status(200).json({
+            status: 200,
+            message: "Login successfull"
+        })
+
+    } catch (error) {
+        console.error("Error loging in user", error.message)
+        return res.status(500).json({
+            status: 500,
+            message: "Error loging in user",
+            error: error.message
+        })
+    }
+}
