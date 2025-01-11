@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 function Navbar() {
     return (
         <nav className="bg-white dark:bg-black">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div className="flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <span className='flex justify-center items-center'>
                     <Kanban className='size-8 mr-2 text-black dark:text-white'/>
