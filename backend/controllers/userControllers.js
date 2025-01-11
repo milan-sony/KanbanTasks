@@ -2,8 +2,9 @@ import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 import sendOTP from "../utils/otpManager.js"
 import generateToken from "../utils/generateTokens.js"
+import Otp from "../models/otpModel.js"
 
-
+// user signup
 export const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body
@@ -72,7 +73,7 @@ export const signup = async (req, res) => {
             })
         }
     } catch (error) {
-        console.error("Error signing up user: ", error.message)
+        console.error("Error signing up user, ", error.message)
         return res.status(500).json({
             status: 500,
             message: "Error signing up user",
@@ -81,6 +82,7 @@ export const signup = async (req, res) => {
     }
 }
 
+// user login
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -111,10 +113,37 @@ export const login = async (req, res) => {
         })
 
     } catch (error) {
-        console.error("Error loging in user", error.message)
+        console.error("Error loging in user, ", error.message)
         return res.status(500).json({
             status: 500,
             message: "Error loging in user",
+            error: error.message
+        })
+    }
+}
+
+// verify user OTP
+export const verifyOTP = async (req, res) => {
+    try {
+        const { email, otp } = req.body
+        // find if the otp exists with the email provided
+        const existingOTP = await Otp.findOneAndDelete({ email: email, otp: otp })
+        if (existingOTP) {
+            return res.status(200).json({
+                status: 200,
+                message: "OTP verified successfully"
+            })
+        } else {
+            return res.status(400).json({
+                status: 400,
+                message: "Invalid OTP"
+            })
+        }
+    } catch (error) {
+        console.error("Error verifying OTP, ", error.message)
+        return res.status(500).json({
+            status: 500,
+            message: "Error verifying OTP",
             error: error.message
         })
     }
