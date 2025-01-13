@@ -8,7 +8,7 @@ function Loginpage() {
             <div className="bg-white dark:bg-black flex justify-center items-center">
                 <h1 className='text-black dark:text-white font-black text-xl sm:text-xl md:text-2xl lg:text-4xl'>KanbanTasks</h1>
             </div>
-            {/* signup form */}
+            {/* login form */}
             <div className="bg-slate-100 dark:bg-gray-900">
                 <div className='w-full h-screen'>
                     <div className="contain pt-36">
