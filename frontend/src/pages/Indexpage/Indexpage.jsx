@@ -2,7 +2,7 @@ import React from 'react'
 import scrumBoard from "/undraw_scrum-board_uqku.svg"
 import { Kanban } from 'lucide-react'
 
-function Homepage() {
+function Indexpage() {
     return (
         <div className='h-dvh'>
             <nav className="bg-white dark:bg-black">
@@ -44,4 +44,4 @@ function Homepage() {
     )
 }
 
-export default Homepage
+export default Indexpage
