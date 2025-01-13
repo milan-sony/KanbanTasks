@@ -2,8 +2,9 @@ import React from 'react'
 
 function Signuppage() {
     return (
-        <div>
-            <h1>Signup</h1>
+        <div className='grid grid-cols-1 md:grid-cols-2'>
+            <div className='bg-red-400'></div>
+            <div className='bg-blue-400'></div>
         </div>
     )
 }
