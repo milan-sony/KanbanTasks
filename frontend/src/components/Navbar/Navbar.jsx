@@ -20,13 +20,7 @@ function Navbar() {
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                         <li>
-                            <a href="#" className="py-2 px-3 md:border-0 md:p-0 text-black dark:text-white hover:text-red-500 font-Open-Sans text-base font-semibold capitalize">Home</a>
-                        </li>
-                        <li>
-                            <a href="#" className="py-2 px-3 md:border-0 md:p-0 text-black dark:text-white hover:text-red-500 font-Open-Sans text-base font-semibold capitalize">About</a>
-                        </li>
-                        <li>
-                            <a href="#" className="py-2 px-3 md:border-0 md:p-0 text-black dark:text-white hover:text-red-500 font-Open-Sans text-base font-semibold capitalize">Login</a>
+                            <button className='bg-black w-32 h-10 text-white font-Open-Sans font-medium rounded-md hover:bg-gray-600 mr-4'>Signup</button>
                         </li>
                     </ul>
                 </div>
