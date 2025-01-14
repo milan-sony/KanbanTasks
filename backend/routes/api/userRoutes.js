@@ -10,6 +10,6 @@ userRoutes.post("/signup", signup)
 userRoutes.post("/login", login)
 
 // verify OTP
-userRoutes.post("/verifyOTP", verifyOTP)
+userRoutes.post("/verifyotp", verifyOTP)
 
 export default userRoutes

@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isEmailAuthenticated:{
+        type: Boolean,
+        default: false,
+        required: false
     }
 },
     {
