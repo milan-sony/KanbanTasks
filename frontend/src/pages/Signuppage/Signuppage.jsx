@@ -32,7 +32,7 @@ function Signuppage() {
                                     </div>
                                     </div>
                                 </div>
-                                <div className="mt-4">
+                                <div className="mt-6">
                                     <button type='submit' className='block w-full py-2 text-center text-white bg-gray-600 rounded dark:hover:bg-black hover:text-white hover:bg-black uppercase font-Open-Sans font-medium'>Create Account
                                     </button>
                                     <div className="flex gap-2 pt-5">
