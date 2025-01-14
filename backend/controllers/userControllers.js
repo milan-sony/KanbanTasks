@@ -129,7 +129,7 @@ export const verifyOTP = async (req, res) => {
         // find if the otp exists with the email provided
         const existingOTP = await Otp.findOneAndDelete({ email: email, otp: otp })
         if (existingOTP) {
-            await User.updateOne({ email: email }, { $set: { isEmailAuthenticated: true } })
+            await User.updateOne({ email: email }, { $set: { isEmailAuthenticated: true } }) // update the value of isEmailAuthenticated field in the user model to true
             return res.status(200).json({
                 status: 200,
                 message: "OTP verified successfully"
