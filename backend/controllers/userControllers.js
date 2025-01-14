@@ -149,3 +149,16 @@ export const verifyOTP = async (req, res) => {
         })
     }
 }
+
+export const checkAuth = (req, res) => {
+    try {
+        res.status(200).json(req.user)
+    } catch (error) {
+        console.error("Error in checking user authentication, ", error.message)
+        return res.status(500).json({
+            status: 500,
+            message: "Error in checking user authentication",
+            error: error.message
+        })
+    }
+}

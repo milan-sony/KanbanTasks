@@ -12,4 +12,7 @@ userRoutes.post("/login", login)
 // verify OTP
 userRoutes.post("/verifyotp", verifyOTP)
 
+// to check whether user authenticated or not (after refresh / made any change)
+router.get("/check", verifyToken, checkAuth)
+
 export default userRoutes
