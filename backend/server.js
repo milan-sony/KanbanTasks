@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import routes from "./routes/index.js"
 import connectDB from "./configs/db.js"
 import bodyParser from "body-parser"
+import cookieParser from "cookie-parser"
 
 // config .env
 dotenv.config()
@@ -19,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+
+// cookie parser
+app.use(cookieParser())
 
 // base URL
 app.use("/", routes)
