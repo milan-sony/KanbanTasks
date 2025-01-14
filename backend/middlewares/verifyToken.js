@@ -3,7 +3,7 @@ import User from "../models/userModel.js"
 
 export const verifyToken = async (req, res, next) => {
     try {
-        const token = req.cookie.jwt // gets the jwt token from cookie (parse cookie)
+        const token = req.cookies.jwt // gets the jwt token from cookie (parse cookie)
         if (!token) {
             return res.status(401).json({
                 status: 401,
@@ -20,7 +20,7 @@ export const verifyToken = async (req, res, next) => {
             })
         }
 
-        const user = await User.findById(decoded.useId).select("-password")
+        const user = await User.findById(decoded.userId).select("-password")
 
         if (!user) {
             return res.status(400).json({

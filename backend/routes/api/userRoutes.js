@@ -1,5 +1,6 @@
 import express from "express";
-import { signup, login, verifyOTP } from "../../controllers/userControllers.js";
+import { signup, login, verifyOTP, checkAuth } from "../../controllers/userControllers.js";
+import { verifyToken } from "../../middlewares/verifyToken.js";
 
 const userRoutes = express.Router()
 
@@ -13,6 +14,6 @@ userRoutes.post("/login", login)
 userRoutes.post("/verifyotp", verifyOTP)
 
 // to check whether user authenticated or not (after refresh / made any change)
-router.get("/check", verifyToken, checkAuth)
+userRoutes.get("/check", verifyToken, checkAuth)
 
 export default userRoutes
