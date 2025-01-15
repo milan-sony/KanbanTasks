@@ -7,7 +7,7 @@ export const verifyToken = async (req, res, next) => {
         if (!token) {
             return res.status(401).json({
                 status: 401,
-                message: "Unauthorized user"
+                message: "Unauthorized user - no token found"
             })
         }
 
