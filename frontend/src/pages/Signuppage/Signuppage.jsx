@@ -1,8 +1,20 @@
 import { EyeOff } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router'
 
 function Signuppage() {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    })
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+        console.log("Form data: ", formData)
+    }
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-screen">
             <div className="bg-white dark:bg-black flex justify-center items-center">
@@ -17,15 +29,15 @@ function Signuppage() {
                             <p className="text-gray-600 mb-6 text-sm dark:text-white font-Open-Sans">Get started with your free account</p>
                             <form autoComplete="off" noValidate>
                                 <div className="space-y-2 mb-2">
-                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Name</label><input type="text" name="fullName" className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="Milan Sony" />
+                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Name</label><input type="text" name="name" value={formData.name} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="Milan Sony" onChange={handleChange} />
                                     </div>
                                 </div>
                                 <div className="space-y-2 mb-2">
-                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Email address</label><input type="email" name="email" className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="youremail.@domain.com" />
+                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Email address</label><input type="email" name="email" value={formData.email} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="youremail.@domain.com" onChange={handleChange}/>
                                     </div>
                                 </div>
                                 <div className="space-y-2 mb-2">
-                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Password</label><div className="relative"><input type="password" name="password" className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="password" />
+                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Password</label><div className="relative"><input type="password" name="password" value={formData.password} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="password" onChange={handleChange}/>
                                         <div className="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300">
                                             <EyeOff className='size-6 text-gray-400' />
                                         </div>
