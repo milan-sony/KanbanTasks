@@ -15,7 +15,7 @@ export const userControllerStore = create((set) => ({
             set({ authUser: res.data })
         } catch (error) {
             set({ authUser: null })
-            console.error("Error in checking auth, ", error.response.data.error)
+            console.error("Error in checking auth, ", error.response.data.message)
         } finally {
             set({ isCheckingAuth: false })
         }
@@ -25,11 +25,11 @@ export const userControllerStore = create((set) => ({
     signup: async (data) => {
         set({ isSigningUp: true })
         try {
-            const res = await axiosInstance("/user/signup", data)
+            const res = await axiosInstance.post("/user/signup", data)
             set({ authUser: res.data })
             return toast.success("Account created successfully")
         } catch (error) {
-            console.error("Error signing up user, ", error.response.data.error)
+            console.error("Error signing up user, ", error.response.data.message)
             return toast.error("Error signing up user")
         } finally {
             set({ isSigningUp: false })
