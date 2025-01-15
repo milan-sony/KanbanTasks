@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { axiosInstance } from '../lib/Axios'
+import toast from 'react-hot-toast'
 
 export const userControllerStore = create((set) => ({
     authUser: null, //check whether user authenticated or not
@@ -14,9 +15,24 @@ export const userControllerStore = create((set) => ({
             set({ authUser: res.data })
         } catch (error) {
             set({ authUser: null })
-            console.error("Error in checking auth, ", error.message)
+            console.error("Error in checking auth, ", error.response.data.error)
         } finally {
             set({ isCheckingAuth: false })
         }
     },
+
+    // user signup
+    signup: async (data) => {
+        set({ isSigningUp: true })
+        try {
+            const res = await axiosInstance("/user/signup", data)
+            set({ authUser: res.data })
+            return toast.success("Account created successfully")
+        } catch (error) {
+            console.error("Error signing up user, ", error.response.data.error)
+            return toast.error("Error signing up user")
+        } finally {
+            set({ isSigningUp: false })
+        }
+    }
 }))

@@ -1,8 +1,12 @@
 import { Eye, EyeOff } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router'
+import toast from "react-hot-toast"
+import { userControllerStore } from '../../store/userControllerStore'
 
 function Signuppage() {
+
+    const { signup, isSigningUp } = userControllerStore()
 
     const [formData, setFormData] = useState({
         name: "",
@@ -18,6 +22,39 @@ function Signuppage() {
         console.log("Form data: ", formData)
     }
 
+    const validateForm = () => {
+        const { name, email, password } = formData // destructure formdata
+
+        // check for empty fields
+        if (!name) {
+            return toast.error("Name field is required")
+        }
+        if (!email) {
+            return toast.error("Email field is required")
+        }
+        if (!password) {
+            return toast.error("Password field is required")
+        }
+        // check password length
+        if (password.length < 6) {
+            return toast.error("Password must be atleast 6 character")
+        }
+        // email format validation
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            return toast.error("Invalid email address")
+        }
+
+        return true
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        const isFormValidate = validateForm()
+        if (isFormValidate === true) {
+            signup(formData)
+        }
+    }
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-screen">
             <div className="bg-white dark:bg-black flex justify-center items-center">
@@ -30,7 +67,7 @@ function Signuppage() {
                         <div className="bg-white max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden dark:bg-slate-900">
                             <h2 className="text-2xl uppercase font-black mb-1 font-Open-Sans text-black dark:text-white">Signup</h2>
                             <p className="text-gray-600 mb-6 text-sm dark:text-white font-Open-Sans">Get started with your free account</p>
-                            <form autoComplete="off" noValidate>
+                            <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
                                 <div className="space-y-2 mb-2">
                                     <div><label className="text-gray-600 dark:text-white mb-2 block">Name</label><input type="text" name="name" value={formData.name} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="Milan Sony" onChange={handleChange} />
                                     </div>
@@ -54,7 +91,15 @@ function Signuppage() {
                                     </div>
                                 </div>
                                 <div className="mt-6">
-                                    <button type='submit' className='block w-full py-2 text-center text-white bg-gray-600 rounded dark:hover:bg-black hover:text-white hover:bg-black uppercase font-Open-Sans font-medium'>Create Account
+                                    <button type='submit' className='block w-full py-2 text-center text-white bg-gray-600 rounded dark:hover:bg-black hover:text-white hover:bg-black uppercase font-Open-Sans font-medium' disabled={isSigningUp}>
+                                        {/* toggle btn based on signup status */}
+                                        {
+                                            isSigningUp ? (
+                                                <span className='animate-pulse'>Loading...</span>
+                                            ) : (
+                                                "Create Account"
+                                            )
+                                        }
                                     </button>
                                     <div className="flex justify-between pt-5">
                                         <p className="text-gray-600 text-sm dark:text-white font-Open-Sans">Already have an account? <Link to="/login" className='text-black dark:text-white text-sm font-semibold underline hover:text-gray-600 font-Open-Sans'>Login</Link></p>
