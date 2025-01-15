@@ -1,4 +1,4 @@
-import { EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router'
 
@@ -9,6 +9,9 @@ function Signuppage() {
         email: "",
         password: ""
     })
+
+    // toggle password
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -33,13 +36,19 @@ function Signuppage() {
                                     </div>
                                 </div>
                                 <div className="space-y-2 mb-2">
-                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Email address</label><input type="email" name="email" value={formData.email} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="youremail.@domain.com" onChange={handleChange}/>
+                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Email address</label><input type="email" name="email" value={formData.email} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="youremail.@domain.com" onChange={handleChange} />
                                     </div>
                                 </div>
                                 <div className="space-y-2 mb-2">
-                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Password</label><div className="relative"><input type="password" name="password" value={formData.password} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="password" onChange={handleChange}/>
-                                        <div className="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300">
-                                            <EyeOff className='size-6 text-gray-400' />
+                                    <div><label className="text-gray-600 dark:text-white mb-2 block">Password</label><div className="relative"><input type={showPassword ? "text" : "password"} name="password" value={formData.password} className="block w-full px-4 py-3 outline-none text-black font-Open-Sans font-normal text-sm rounded-md outline-gray-200" placeholder="password" onChange={handleChange} />
+                                        <div className="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300" onClick={() => setShowPassword(!showPassword)}>
+                                            {
+                                                showPassword ? (
+                                                    <Eye className='size-6 text-gray-400' />
+                                                ) : (
+                                                    <EyeOff className='size-6 text-gray-400' />
+                                                )
+                                            }
                                         </div>
                                     </div>
                                     </div>
