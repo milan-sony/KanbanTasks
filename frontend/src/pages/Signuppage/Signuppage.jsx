@@ -19,7 +19,6 @@ function Signuppage() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
-        console.log("Form data: ", formData)
     }
 
     const validateForm = () => {
