@@ -64,6 +64,9 @@ export const signup = async (req, res) => {
             await newUser.save()
             return res.status(201).json({
                 status: 201,
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
                 message: "Account successfully created"
             })
         } else {
@@ -109,6 +112,9 @@ export const login = async (req, res) => {
         generateToken(user._id, res)
         res.status(200).json({
             status: 200,
+            _id: user._id,
+            name: user.name,
+            email: user.email,
             message: "Login successfull"
         })
 
