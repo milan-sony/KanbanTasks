@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import { axiosInstance } from '../lib/Axios'
-import { set } from 'mongoose'
 
 export const userControllerStore = create((set) => ({
     authUser: null, //check whether user authenticated or not
