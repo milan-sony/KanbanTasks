@@ -94,7 +94,7 @@ function Signuppage() {
                                         {/* toggle btn based on signup status */}
                                         {
                                             isSigningUp ? (
-                                                <span className='animate-pulse'>Loading...</span>
+                                                <span className='animate-pulse'>Signing In...</span>
                                             ) : (
                                                 "Create Account"
                                             )
