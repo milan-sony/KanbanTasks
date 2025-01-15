@@ -11,15 +11,15 @@ import Homepage from '../pages/Homepage/Homepage';
 
 function Router() {
 
-    const { authUser } = userControllerStore()
+    const { authUser, isOTPVerified } = userControllerStore()
 
     return (
         <Routes>
             <Route path="/" element={<Indexpage />} />
             <Route path="/learnmore" element={<LeanMorePage />} />
-            <Route path="/signup" element={!authUser ? <Signuppage /> : <Navigate to={"/home"} />} />
+            <Route path="/signup" element={!authUser ? <Signuppage /> : <Navigate to={"/verifyotp"} />} />
             <Route path="/login" element={!authUser ? <Loginpage /> : <Navigate to={"/home"} />} />
-            <Route path="/verifyotp" element={<VerifyOTPPage />} />
+            <Route path="/verifyotp" element={authUser && isOTPVerified ? <Navigate to={"/home"} /> : <VerifyOTPPage />} />
             <Route path="/home" element={authUser ? <Homepage /> : <Navigate to={"/login"} />} />
             <Route path="*" element={<Nopage />} />
         </Routes>
