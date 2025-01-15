@@ -35,9 +35,9 @@ function Signuppage() {
                                 <div className="mt-6">
                                     <button type='submit' className='block w-full py-2 text-center text-white bg-gray-600 rounded dark:hover:bg-black hover:text-white hover:bg-black uppercase font-Open-Sans font-medium'>Create Account
                                     </button>
-                                    <div className="flex gap-2 pt-5">
-                                        <p className="text-gray-600 text-sm dark:text-white font-Open-Sans">Already have an account?</p>
-                                        <Link to="/login" className='text-black dark:text-white text-sm font-semibold underline hover:text-gray-600 font-Open-Sans'>Login</Link>
+                                    <div className="flex justify-between pt-5">
+                                        <p className="text-gray-600 text-sm dark:text-white font-Open-Sans">Already have an account? <Link to="/login" className='text-black dark:text-white text-sm font-semibold underline hover:text-gray-600 font-Open-Sans'>Login</Link></p>
+                                        <Link to="/" className='text-black dark:text-white text-sm font-semibold underline hover:text-gray-600 font-Open-Sans'>Go back</Link>
                                     </div>
                                 </div>
                             </form>
