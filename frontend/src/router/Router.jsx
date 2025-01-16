@@ -19,7 +19,7 @@ function Router() {
             <Route path="/learnmore" element={<LeanMorePage />} />
             <Route path="/signup" element={!authUser ? <Signuppage /> : <Navigate to={"/verifyotp"} />} />
             <Route path="/login" element={!authUser ? <Loginpage /> : <Navigate to={"/home"} />} />
-            <Route path="/verifyotp" element={authUser && isOTPVerified ? <Navigate to={"/home"} /> : <VerifyOTPPage />} />
+            <Route path="/verifyotp" element={authUser || !isOTPVerified ? <Navigate to={"/home"} /> : <VerifyOTPPage />} />
             <Route path="/home" element={authUser ? <Homepage /> : <Navigate to={"/login"} />} />
             <Route path="*" element={<Nopage />} />
         </Routes>
