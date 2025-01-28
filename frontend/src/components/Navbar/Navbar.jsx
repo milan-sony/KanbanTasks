@@ -20,9 +20,7 @@ function Navbar() {
                 </button>
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-                        <li>
-                            <Link to={"/signup"} className='bg-black w-32 h-10 text-white font-Open-Sans font-medium rounded-md hover:bg-gray-600 mr-4'>Signup</Link>
-                        </li>
+                        <Link to={"/signup"} className='bg-black w-32 h-10 text-white font-Open-Sans font-medium rounded-md hover:bg-gray-600 dark:bg-white dark:text-black dark:hover:text-white capitalize flex justify-center items-center'>Signup</Link>
                     </ul>
                 </div>
             </div>

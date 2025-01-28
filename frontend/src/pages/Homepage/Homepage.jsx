@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from '../../components/Navbar/Navbar'
 
 function Homepage() {
     return (
         <div>
-            <h1 className='text-black dark:text-white text-4xl font-black font-Open-Sans'>Home page</h1>
+            <Navbar />
         </div>
     )
 }
