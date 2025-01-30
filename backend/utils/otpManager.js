@@ -19,12 +19,12 @@ const sendOTP = async (email) => {
             email: email,
             otp: OTP
         })
-        if (newOTP) {
-            console.log("OTP saved to DB")
-            await newOTP.save()
-        } else {
+        if (!newOTP) {
             return console.log("Something went wrong, OTP not generated")
         }
+        console.log("newOTP: ", newOTP)
+        await newOTP.save()
+        console.log("OTP saved to DB")
 
         // send OTP via email
         await mailSender({

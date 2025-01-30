@@ -173,3 +173,11 @@ export const checkAuth = (req, res) => {
         })
     }
 }
+
+export const checkIsOtpVerified = () =>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
