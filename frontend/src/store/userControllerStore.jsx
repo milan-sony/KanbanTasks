@@ -7,7 +7,8 @@ export const userControllerStore = create((set) => ({
     isCheckingAuth: true, //state to check the authentication (initially set the value to true bcz asoonas we refresh the pg we will check whether the user is authenticated, with this the authUser value change)
     isSigningUp: false,
     // isLogingIn: false,
-    // isOTPVerified: false,
+    OTPVerified: null,
+    isOTPVerified: false,
 
     // check user is authenticated on every change/routes
     checkAuth: async () => {
@@ -41,16 +42,21 @@ export const userControllerStore = create((set) => ({
     },
 
     // verify OTP
-    // verifyOTP: async (data) => {
-    //     try {
-    //         const res = await axiosInstance.post("/user/verifyotp", data)
-    //         if (res) {
-    //             set({ isOTPVerified: true })
-    //             return toast.success("OTP verified successfully")
-    //         }
-    //     } catch (error) {
-    //         console.error("Error verifying OTP, ", error.response.data.message)
-    //         return toast.error("Error verifying OTP")
-    //     }
-    // }
+    verifyOTP: async (data) => {
+        try {
+            set({ isOTPVerified: true })
+            const res = await axiosInstance.post("/user/verifyotp", data)
+            if (res) {
+                console.log("OTPVerified: ", res)
+                set({ OTPVerified: res.data || null })
+                return toast.success("OTP verified successfully")
+            }
+        } catch (error) {
+            set({ OTPVerified: null })
+            console.error(error.response?.data?.message || error.message || "Error in verifying OTP")
+            return toast.error("Error verifying OTP")
+        } finally {
+            set({ isOTPVerified: false })
+        }
+    }
 }))

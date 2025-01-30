@@ -11,9 +11,10 @@ import Homepage from '../pages/Homepage/Homepage';
 
 function Router() {
 
-    const { authUser, isOTPVerified } = userControllerStore()
+    const { authUser, isOTPVerified, OTPVerified } = userControllerStore()
 
     console.log("Router - authUser: ", authUser)
+    console.log("Router - OTPVerified: ", OTPVerified)
     // console.log("Router - isOTPVerified: ", isOTPVerified)
 
     return (

@@ -46,6 +46,7 @@ function VerifyOTPPage() {
         e.preventDefault()
         const isFormValidate = validateForm()
         if (isFormValidate === true) {
+            console.log("Verify OTP: ", formData)
             verifyOTP(formData)
         }
     }
