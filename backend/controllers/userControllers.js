@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
 
         if (newUser) {
             // send OTP
-            // await sendOTP(email)
+            await sendOTP(email)
             // generate token
             generateToken(newUser._id, res)
             await newUser.save()
@@ -132,13 +132,18 @@ export const login = async (req, res) => {
 export const verifyOTP = async (req, res) => {
     try {
         const { email, otp } = req.body
+        console.log("mail:", email)
+        console.log("otp: ", otp)
         // find if the otp exists with the email provided
         const existingOTP = await Otp.findOneAndDelete({ email: email, otp: otp })
+        console.log("Existing otp", existingOTP)
         if (existingOTP) {
+            console.log("OTP deleted from DB")
             await User.updateOne({ email: email }, { $set: { isEmailAuthenticated: true } }) // update the value of isEmailAuthenticated field in the user model to true
+            console.log("User table updated")
             return res.status(200).json({
                 status: 200,
-                message: "OTP verified successfully"
+                message: "OTP verified successfully",
             })
         } else {
             return res.status(400).json({
