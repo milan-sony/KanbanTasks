@@ -58,7 +58,8 @@ export const signup = async (req, res) => {
 
         if (newUser) {
             // send OTP
-            await sendOTP(email)
+            // await sendOTP(email)
+
             // generate token
             generateToken(newUser._id, res)
             await newUser.save()
@@ -171,13 +172,5 @@ export const checkAuth = (req, res) => {
             message: "Error in checking user authentication",
             error: error.message
         })
-    }
-}
-
-export const checkIsOtpVerified = () =>{
-    try {
-        
-    } catch (error) {
-        
     }
 }
