@@ -1,8 +1,8 @@
 import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 // import sendOTP from "../utils/otpManager.js"
-import generateToken from "../utils/generateTokens.js"
 import Otp from "../models/otpModel.js"
+import jwt from "jsonwebtoken"
 
 // user signup
 export const signup = async (req, res) => {
@@ -60,8 +60,6 @@ export const signup = async (req, res) => {
             // send OTP
             // await sendOTP(email)
 
-            // generate token
-            generateToken(newUser._id, res)
             await newUser.save()
             return res.status(201).json({
                 status: 201,
@@ -110,12 +108,24 @@ export const login = async (req, res) => {
         }
 
         // generate token for user login
-        generateToken(user._id, res)
+        const token = jwt.sign({ email: email, user_id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "24h"
+        })
+
+        // generated token is set as a cookie
+        res.cookie("jwt", token, {
+            maxAge: 24 * 60 * 60 * 1000, // Sets the lifetime of the cookie to 24 hrs (in milliseconds)
+            httpOnly: true, // prevent XSS
+            sameSite: "strict", // prevent CSRF
+            secure: process.env.NODE_ENV !== "development" // This flag ensures that the cookie is only sent over HTTPS connections. It is set to true in production (when NODE_ENV is not "development").
+        })
+
         res.status(200).json({
             status: 200,
             _id: user._id,
             name: user.name,
             email: user.email,
+            token: token,
             message: "Login successfull"
         })
 

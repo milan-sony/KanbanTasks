@@ -3,7 +3,7 @@ import User from "../models/userModel.js"
 
 export const verifyToken = async (req, res, next) => {
     try {
-        const token = req.cookies.jwt // gets the jwt token from cookie (parse cookie)
+        const token = req.header("Authorization") // gets the jwt token from header (req.header.authorization)
         if (!token) {
             return res.status(401).json({
                 status: 401,
@@ -11,7 +11,11 @@ export const verifyToken = async (req, res, next) => {
             })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        // split the bearer token "bearer efhjkhfjkhjkhsjkhsjkhjgkhkjsh"
+        const bearer = token.split(' ');
+        const bearerToken = bearer[1];
+
+        const decoded = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
         if (!decoded) {
             return res.status(401).json({
@@ -20,7 +24,7 @@ export const verifyToken = async (req, res, next) => {
             })
         }
 
-        const user = await User.findById(decoded.userId).select("-password")
+        const user = await User.findById(decoded.user_id).select("-password")
 
         if (!user) {
             return res.status(400).json({
