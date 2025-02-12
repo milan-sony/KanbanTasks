@@ -11,6 +11,6 @@ const api = router.get("/", (req, res) => {
 })
 
 // user routes
-router.use("/user", userRoutes)
+router.use("/users", userRoutes)
 
 export default api

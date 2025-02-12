@@ -1,6 +1,6 @@
 import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
-import sendOTP from "../utils/otpManager.js"
+// import sendOTP from "../utils/otpManager.js"
 import generateToken from "../utils/generateTokens.js"
 import Otp from "../models/otpModel.js"
 
